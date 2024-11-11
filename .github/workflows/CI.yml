@@ -51,4 +51,11 @@ jobs:
         run: |
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
+      # Build a Docker image based on the provided Dockerfile
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
           tags: pichso/hello-app:${{ steps.vars.outputs.sha_short }}
